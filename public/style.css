@@ -1,0 +1,8 @@
+.error {
+	margin: 0;
+	padding: 0;
+}
+
+.error > li {
+	color: crimson;
+}

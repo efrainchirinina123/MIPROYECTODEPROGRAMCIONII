@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    container_name: database
+    image: mariadb:10.11.2-jammy
+    environment:
+      MARIADB_USER: ${MYSQL_USER}
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+      MARIADB_ROOT_PASSWORD: root-secret-password
+      MARIADB_DATABASE: ${MYSQL_DB_NAME}
+    restart: always
+    ports:
+      - 3307:3306
+    volumes:
+      - ./database:/var/lib/mysql
+
+  myadmin:
+    depends_on:
+      - db
+    container_name: myadmin
+    image: phpmyadmin:5.2.0-apache
+    environment:
+      PMA_ARBITRARY: 1
+    ports:
+      - 8070:80
+
+
